@@ -102,6 +102,24 @@ function drawRepeat() {
     if(!stopRunloop) setTimeout('drawRepeat()',20);
 }
 
+function press(c) {
+    console.log("press "+c);
+    if(c==32) {
+	if(mode == MODE_TITLE) {
+	    resetGame();
+	    mode = MODE_PLAY;
+	}
+    } else {
+	keysDown[c] = 1;
+    }
+}
+
+function unpress(c) {
+    console.log("unpress "+c);
+    keysDown[c] = 0;
+}
+
+
 if (canvas.getContext('2d')) {
     stopRunloop = false;
     ctx = canvas.getContext('2d');
@@ -124,6 +142,8 @@ if (canvas.getContext('2d')) {
 	}
     };
 
+
+    
     body.onkeyup = function (event) {
 	var c = event.keyCode;
         keysDown[c] = 0;
